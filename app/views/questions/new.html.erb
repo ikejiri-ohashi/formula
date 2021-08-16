@@ -1,0 +1,10 @@
+<h2>質問を入力</h2>
+<%= form_with model: @question, url: questions_path, local: true do |f| %>
+  <%# <%= render 'shared/error_messages', model: f.object %>
+  
+  <%= f.text_area :url, placeholder:"動画のリンクを入力" %>
+  <%= f.text_area :time, placeholder:"時間を入力" %>
+  <%= f.text_area :text, placeholder:"補足事項を入力" %>
+  <%= f.submit "投稿する" %>
+  <%=link_to 'もどる', root_path, class:"back-btn" %>
+<% end %>

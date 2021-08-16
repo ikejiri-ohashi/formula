@@ -14,14 +14,14 @@
 | ------ | ---------- | ------------------------------ |
 | url    | string     | null: false                    |
 | time   | integer    | null: false                    |
-| text   | string     | null: false                    |
+| text   | text       | null: false                    |
 | user   | references | null: false, foreign_key: true |
 
 ## answers テーブル
 
 | Column   | Type       | Options                        |
 | -------- | ---------- | ------------------------------ |
-| text     | string     | null: false                    |
+| text     | text       | null: false                    |
 | user     | references | null: false, foreign_key: true |
 | question | references | null: false, foreign_key: true |
 
