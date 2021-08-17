@@ -1,14 +1,19 @@
 class AnswersController < ApplicationController
+  def new
+    @answer = Answer.new
+  end
+  
   def create
-    @answer = Answer.new(answer_params)
+    @answer = Answer.create(answer_params)
     if @answer.save
       redirect_to root_path
     else
-      render:index
+      render :new
     end
   end
 
   private
   def answer_params
-    params.require(:answer).permit(:text).merge(user_id: current_user.id, question_id)
+    params.require(:answer).permit(:text).merge(user_id: current_user.id, question_id: params[:question_id])
+  end
 end
