@@ -3,5 +3,5 @@ class Question < ApplicationRecord
   has_many :answers
   has_many :question_categories
   has_many :question, through: :question_categories
-  validates :url, :time, :text, presence: true
+  validates :url, :time, :text, :category_ids, presence: true
 end
