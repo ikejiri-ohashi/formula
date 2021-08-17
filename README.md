@@ -17,6 +17,11 @@
 | text   | text       | null: false                    |
 | user   | references | null: false, foreign_key: true |
 
+### Association
+* belongs_to :user
+* has_many :questions
+* has_many :categories
+
 ## answers テーブル
 
 | Column   | Type       | Options                        |
@@ -25,11 +30,18 @@
 | user     | references | null: false, foreign_key: true |
 | question | references | null: false, foreign_key: true |
 
+### Association
+* belongs_to :user
+* belongs_to :question
+
 ## categories テーブル
 
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
 | name    | string     | null: false                    |
+
+### Association
+* has_many questions
 
 ## questions_categories テーブル
 
@@ -37,3 +49,7 @@
 | --------- | ---------- | ------------------------------ |
 | question  | references | null: false, foreign_key: true |
 | category  | references | null: false, foreign_key: true |
+
+### Association
+* belongs_to :question
+* belongs_to :categories
