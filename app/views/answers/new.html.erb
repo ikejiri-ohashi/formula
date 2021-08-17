@@ -1,0 +1,6 @@
+<div class="container">
+  <%= form_with(model: [@question, @answer], local: true) do |form| %>
+    <%= form.text_area :text, placeholder: "回答する", rows: "2" %>
+    <%= form.submit "SEND" %>
+  <% end %>
+</div>

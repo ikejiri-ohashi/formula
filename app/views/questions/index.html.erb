@@ -12,11 +12,17 @@
         <%= link_to "新規登録", new_user_registration_path, class: "post" %>
       </div>
     <% end %>
-
-    <% @questions.each do |question| %>
-      <%= question.url %>
-      <%= question.time %>
-      <%= question.text %>
-    <% end %>
   </div>
 </header>
+
+<div class="container">
+  <% @questions.each do |question| %>
+    <%= link_to question_path(question.id) do %>
+      <div class="content"> 
+        <%= question.url %>
+        <%= question.time %>
+        <%= question.text %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
