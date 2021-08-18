@@ -16,10 +16,12 @@
 <div class="answer-btn">
   <%= link_to "回答する", new_question_answer_path(@question) %>
 </div>
+<h1>回答一覧</h1>
 <div class="answer">
-  <h4>回答一覧</h4>
   <% @answer.each do |answer| %>
-    <%= answer.text %>
+    <div class="answer-text">
+      <%= answer.text %>
+    </div>
   <% end %>
 </div>
 

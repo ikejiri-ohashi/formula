@@ -7,6 +7,15 @@
   flex-direction: column;
 }
 
+.answer-box {
+  height:800px;
+  background-color: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .url {
   height: 30px;
   width: 300px;
