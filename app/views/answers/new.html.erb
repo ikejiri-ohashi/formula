@@ -1,10 +1,10 @@
-<h4>回答記入欄</h4>
-<div class="container">
-  <%= form_with model: @answer, url: question_answers_path, local: true do |f| %>
-    <%= f.text_area :text, placeholder: "回答する", rows: "2" %>
-    <%= f.submit "SEND" %>
-  <% end %>
-</div>
+<h1>回答記入欄</h1>
+<%= form_with model: @answer, url: question_answers_path, local: true do |f| %>
+  <div class="answer-box">
+      <%= f.text_area :text, class:'text', placeholder: "翻訳を入力" %>
+      <%= f.submit "回答する", class:"btn" %>
+  </div>
+<% end %>
 <div class="back-btn">
   <%= link_to "トップページに戻る", root_path %>
 </div>
