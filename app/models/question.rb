@@ -1,7 +1,8 @@
 class Question < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :category
   belongs_to :user
   has_many :answers
-  has_many :question_categories
-  has_many :question, through: :question_categories
-  validates :url, :time, :text, :category_ids, presence: true
+  validates :url, :time, :text, presence: true
+  validates :category_id, numericality: { other_than: 1, message: "を選択してください" } 
 end

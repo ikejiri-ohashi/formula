@@ -1,18 +1,12 @@
-<h2>質問を入力</h2>
 <%= form_with model: @question, url: questions_path, local: true do |f| %>
   <%# <%= render 'shared/error_messages', model: f.object %>
-  
-  <%= f.text_area :url, placeholder:"動画のリンクを入力" %>
-  <%= f.text_area :time, placeholder:"時間を入力" %>
-  <%= f.text_area :text, placeholder:"補足事項を入力" %>
-  <div class="category">
-    <select name="question[category_ids]">
-      <option value="">カテゴリーを選択してください</option>
-      <% Category.all.each do |category| %>
-        <option value=<%= category.id %>><%= category.name %></option>
-      <% end %>
-    </select>
+  <div class="question-box">
+    質問を投稿する
+    <%= f.text_area :url, class:"url", placeholder:"動画のリンクを入力してください" %>
+    <%= f.text_area :time, class:"time", placeholder:"時間を入力" %>
+    <%= f.text_area :text, class:'text', placeholder:"補足事項を入力" %>
+    <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"question-select"}) %>
+    <%= f.submit "投稿する", class:"btn" %>
   </div>
-  <%= f.submit "投稿する" %>
   <%=link_to 'トップページにもどる', root_path, class:"back-btn" %>
 <% end %>

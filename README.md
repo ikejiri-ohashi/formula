@@ -8,19 +8,23 @@
 | email              | string | null: false |
 | encrypted_password | string | null: false |
 
+### Association
+* has_many :answers
+* has_many :questions
+
 ## questions テーブル
 
-| Column | Type       | Options                        |
-| ------ | ---------- | ------------------------------ |
-| url    | string     | null: false                    |
-| time   | integer    | null: false                    |
-| text   | text       | null: false                    |
-| user   | references | null: false, foreign_key: true |
+| Column   | Type       | Options                        |
+| -------- | ---------- | ------------------------------ |
+| url      | string     | null: false                    |
+| time     | string     | null: false                    |
+| text     | string     | null: false                    |
+| category | integer    | null: false                    |
+| user     | references | null: false, foreign_key: true |
 
 ### Association
 * belongs_to :user
-* has_many :questions
-* has_many :categories
+* has_many :answers
 
 ## answers テーブル
 
@@ -33,23 +37,3 @@
 ### Association
 * belongs_to :user
 * belongs_to :question
-
-## categories テーブル
-
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| name    | string     | null: false                    |
-
-### Association
-* has_many questions
-
-## questions_categories テーブル
-
-| Column    | Type       | Options                        |
-| --------- | ---------- | ------------------------------ |
-| question  | references | null: false, foreign_key: true |
-| category  | references | null: false, foreign_key: true |
-
-### Association
-* belongs_to :question
-* belongs_to :categories

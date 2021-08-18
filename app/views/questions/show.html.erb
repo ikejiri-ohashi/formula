@@ -1,7 +1,16 @@
-<div class="content"> 
-  <%= @question.url %>
-  <%= @question.time %>
-  <%= @question.text %>
+<div class="question">
+  <div class="question-category">
+    <%= @question.category.name %>
+  </div>
+  <div class="question-text">
+    <%= @question.text %>
+  </div>
+  <div class="question-url">
+    <%= @question.url %>
+  </div>
+  <div class="question-time">
+    <%= @question.time %>
+  </div>
 </div>
 
 <div class="answer-btn">

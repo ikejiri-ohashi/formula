@@ -1,0 +1,41 @@
+.question-box {
+  height:800px;
+  background-color: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.url {
+  height: 30px;
+  width: 300px;
+  margin: 20px;
+}
+
+.time {
+  height: 30px;
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+.text {
+  height: 100px;
+  width: 300px;
+  resize:none;
+  margin-bottom: 20px;
+}
+
+.question-select{
+  height: 30px;
+  width: 250px;
+}
+
+.btn {
+  width: 200px;
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid white;
+  background-color: orange;
+  color: white;
+}
