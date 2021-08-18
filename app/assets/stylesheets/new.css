@@ -38,24 +38,33 @@
 .question-select{
   height: 30px;
   width: 250px;
+  margin-bottom: 20px;
 }
 
 .btn {
-  width: 200px;
-  margin-top: 20px;
-  padding: 15px;
+  display: block;
+  width: 150px;
+  padding: 10px;
   border: 1px solid white;
   background-color: orange;
   color: white;
+  text-decoration: none;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 .back-btn {
-  width: 200px;
-  margin-top: 20px;
-  padding: 15px;
+  display: block;
+  width: 100px;
+  padding: 10px;
   border: 1px solid white;
   background-color: skyblue;
   color: white;
+  text-decoration: none;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 .new_user {
