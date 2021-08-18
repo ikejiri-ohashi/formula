@@ -1,8 +1,8 @@
 <header class="header">
-  <div class="header__bar row">
-    <h1 class="grid-6"><a href="/">Formulaトランジション</a></h1>
+  <div class="header__bar">
+    <h1 class="grid-6"><a href="/">F知恵袋</a></h1>
     <% if user_signed_in? %>
-      <div class="user_nav grid-6">
+      <div class="user_nav">
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
         <%= link_to "投稿する", new_question_path, class: "post"%>
       </div>
@@ -15,14 +15,22 @@
   </div>
 </header>
 
-<div class="container">
+
   <% @questions.each do |question| %>
-    <%= link_to question_path(question.id) do %>
-      <div class="content"> 
-        <%= question.url %>
-        <%= question.time %>
-        <%= question.text %>
-      </div>
-    <% end %>
+    <div class="question">
+      <%= link_to question_path(question.id) do %>
+        <div class="question-category">
+          <%= question.category.name %>
+        </div>
+        <div class="question-text">
+          <%= question.text %>
+        </div>
+        <div class="question-url">
+          <%= question.url %>
+        </div>
+        <div class="question-time">
+          <%= question.time %>
+        </div>
+      <% end %>
+    </div>
   <% end %>
-</div>
