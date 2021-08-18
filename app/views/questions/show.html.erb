@@ -1,3 +1,4 @@
+<h1>質問詳細</h1>
 <div class="question">
   <div class="question-category">
     <%= @question.category.name %>
@@ -13,9 +14,6 @@
   </div>
 </div>
 
-<div class="answer-btn">
-  <%= link_to "回答する", new_question_answer_path(@question) %>
-</div>
 <h1>回答一覧</h1>
 <div class="answer">
   <% @answer.each do |answer| %>
@@ -25,6 +23,4 @@
   <% end %>
 </div>
 
-<div class="back-btn">
-  <%= link_to "トップページに戻る", root_path %>
-</div>
+<%= link_to "トップページに戻る", root_path, class:"back-btn" %>

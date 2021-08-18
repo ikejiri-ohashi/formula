@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
   def index
     @questions = Question.order('created_at DESC')
     @answer = Answer.new

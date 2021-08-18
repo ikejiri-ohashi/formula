@@ -20,9 +20,8 @@
         </div>
       <% end -%>
 
-      <div class="actions">
-        <%= f.submit "Log in" %>
-      </div>
+      <%= f.submit "Log in", class:"btn"%>
+      <%=link_to "戻る", root_path, class:"back-btn" %>
     <% end %>
   </div>
 </div>

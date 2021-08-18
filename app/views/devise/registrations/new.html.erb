@@ -1,6 +1,6 @@
 <div class="contents row">
   <div class="container">
-    <h2>ユーザー登録</h2>
+    <h1>ユーザー登録</h1>
     <%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -27,9 +27,8 @@
         <%= f.password_field :password_confirmation, autocomplete: "off" %>
       </div>
 
-      <div class="actions">
-        <%= f.submit "Sign up" %>
-      </div>
+      <%= f.submit "新規ユーザー登録", class:"btn" %>
+      <%=link_to "戻る", root_path, class:"back-btn" %>
     <% end %>
   </div>
 </div>
