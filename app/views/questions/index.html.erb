@@ -3,8 +3,8 @@
     <h1 class="grid-6"><a href="/">F知恵袋</a></h1>
     <% if user_signed_in? %>
       <div class="user_nav">
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
         <%= link_to "質問を投稿する", new_question_path, class: "post"%>
+        <%= link_to "ログアウト", destroy_user_session_path, class: "back-btn", method: :delete %>
       </div>
     <% else %>
       <div class="grid-6">

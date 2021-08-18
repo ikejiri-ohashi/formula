@@ -1,10 +1,10 @@
 <%= form_with model: @question, url: questions_path, local: true do |f| %>
-  <%# <%= render 'shared/error_messages', model: f.object %>
   <div class="question-box">
-    質問を投稿する
-    <%= f.text_area :url, class:"url", placeholder:"動画のリンクを入力してください" %>
-    <%= f.text_area :time, class:"time", placeholder:"時間を入力" %>
-    <%= f.text_area :text, class:'text', placeholder:"補足事項を入力" %>
+    <h1>質問を投稿する</h1>
+    <%= render 'shared/error_messages', model: f.object %>
+    <%= f.text_area :url, class:"url", placeholder:"動画のリンクを入力してください(必須)" %>
+    <%= f.text_area :time, class:"time", placeholder:"動画内の時間を指定してください(必須)" %>
+    <%= f.text_area :text, class:'text', placeholder:"補足事項があれば記入してください(任意)" %>
     <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"question-select"}) %>
     <%= f.submit "投稿する", class:"btn" %>
     <%= link_to '戻る', root_path, class:"back-btn" %>

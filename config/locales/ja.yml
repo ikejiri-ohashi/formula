@@ -1,0 +1,12 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        nickname: ニックネーム
+      question:
+        url: 動画のリンク
+        text: 簡単な説明
+        time: 動画内の時間
+        category_id: カテゴリー
+      answer:
+        text: 翻訳
