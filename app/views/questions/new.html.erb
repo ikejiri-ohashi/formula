@@ -7,6 +7,6 @@
     <%= f.text_area :text, class:'text', placeholder:"補足事項を入力" %>
     <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"question-select"}) %>
     <%= f.submit "投稿する", class:"btn" %>
+    <%= link_to '戻る', root_path, class:"back-btn" %>
   </div>
-  <%=link_to 'トップページにもどる', root_path, class:"back-btn" %>
 <% end %>

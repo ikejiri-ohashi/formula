@@ -48,3 +48,27 @@
   background-color: orange;
   color: white;
 }
+
+.back-btn {
+  width: 200px;
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid white;
+  background-color: skyblue;
+  color: white;
+}
+
+.new_user {
+  height:800px;
+  background-color: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.field {
+  height: 30px;
+  width: 300px;
+  margin-bottom: 20px;
+}
