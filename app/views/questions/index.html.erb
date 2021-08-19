@@ -1,39 +1,86 @@
-<header class="blog-header py-3">
-  <div class="row flex-nowrap justify-content-between align-items-center">
-    <div class="col-4 text-center">
-      <a class="blog-header-logo text-dark" href="/">エフー知恵袋</a>
+<div class="container">
+  <header class="blog-header py-3">
+    <div class="row flex-nowrap justify-content-between align-items-center">
+      <div class="col-4 text-center">
+        <a class="blog-header-logo text-dark" href="/">エフー知恵袋</a>
+      </div>
+      <div class="col-4 d-flex justify-content-end align-items-center">
+        <%# <a class="link-secondary" href="#" aria-label="Search"> %>
+          <%# <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg> %>
+        <%# </a> %>
+        <% if user_signed_in? %>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-sm btn-outline-secondary" %>
+        <% else %>
+          <%= link_to "新規ユーザー登録", new_user_registration_path, class:"btn btn-sm btn-outline-secondary"%>
+          <%= link_to "ログイン", new_user_session_path, class:"btn btn-sm btn-outline-secondary" %>
+        <% end %>
+      </div>
     </div>
-    <div class="col-4 d-flex justify-content-end align-items-center">
-      <%# <a class="link-secondary" href="#" aria-label="Search"> %>
-        <%# <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg> %>
-      <%# </a> %>
-      <% if user_signed_in? %>
-        <%= link_to "質問を投稿する", new_question_path, class:"btn btn-sm btn-outline-secondary" %>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-sm btn-outline-secondary" %>
-      <% else %>
-        <%= link_to "新規ユーザー登録", new_user_registration_path, class:"btn btn-sm btn-outline-secondary"%>
-        <%= link_to "ログイン", new_user_session_path, class:"btn btn-sm btn-outline-secondary" %>
-      <% end %>
+  </header>
+</div>
+
+<main class="container">
+  <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+    <div class="col-md-6 px-0">
+      <h1 class="display-4 font-italic">疑問に思ってるF1英語はありませんか？</h1>
+      <p class="lead my-3">F1ドライバーが運転中に発する音声にはエンジンノイズが混ざっており、Google翻訳も聞き取ってくれません。分からないままになっているF1英語を私が翻訳します。</p>
+      <p class="lead mb-0"><%= link_to "質問してみる", new_question_path, class:"text-white fw-bold" %></p>
     </div>
   </div>
-</header>
-
-
-  <% @questions.each do |question| %>
-    <div class="question">
-      <%= link_to question_path(question.id) do %>
-        <div class="question-category">
-          <%= question.category.name %>
-        </div>
-        <div class="question-text">
-          <%= question.text %>
-        </div>
-        <div class="question-url">
-          <%= question.url %>
-        </div>
-        <div class="question-time">
-          <%= question.time %>
-        </div>
+  <div class="row">
+    <div class="col-md-8">
+      <h2 class="pb-4 mb-4 font-italic border-bottom">
+        新着の質問一覧
+      </h2>
+      <% @questions.each do |question| %>
+        <article class="blog-post">
+          <%= link_to question_path(question.id) do %>
+            <h2 class="blog-post-title">
+              <%= question.category.name %>
+            </h2>
+            <p class="blog-post-meta"><%= question.user.nickname %></p>
+            <h4><%= question.text %></h4>
+            <blockquote>
+              <h5><%= question.url %></h5>
+            </blockquote>
+            <blockquote>
+              <h4><%= question.time %></h4>
+            </blockquote>
+            <hr>
+          <% end %>
+        </article>
       <% end %>
     </div>
-  <% end %>
+    <div class="col-md-4">
+      <div class="p-4 mb-3 bg-light rounded">
+        <h4 class="font-italic">ブログについて</h4>
+        <p class="mb-0">吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも<em>薄暗いじめじめした所で</em>ニャーニャー泣いていた事だけは記憶している。</p>
+      </div>
+      <div class="p-4">
+        <h4 class="font-italic">アーカイブ</h4>
+        <ol class="list-unstyled mb-0">
+          <li><a href="#">2014/03</a></li>
+          <li><a href="#">2014/02</a></li>
+          <li><a href="#">2014/01</a></li>
+          <li><a href="#">2013/12</a></li>
+          <li><a href="#">2013/11</a></li>
+          <li><a href="#">2013/10</a></li>
+          <li><a href="#">2013/09</a></li>
+          <li><a href="#">2013/08</a></li>
+          <li><a href="#">2013/07</a></li>
+          <li><a href="#">2013/06</a></li>
+          <li><a href="#">2013/05</a></li>
+          <li><a href="#">2013/04</a></li>
+        </ol>
+      </div>
+      <div class="p-4">
+        <h4 class="font-italic">SNS</h4>
+        <ol class="list-unstyled">
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">Facebook</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</main>
