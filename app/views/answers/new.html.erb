@@ -1,9 +1,15 @@
-<h1>回答記入欄</h1>
-<%= form_with model: @answer, url: question_answers_path, local: true do |f| %>
-  <div class="answer-box">
-    <%= render "shared/error_messages", model: f.object %>
-    <%= f.text_area :text, class:'text', placeholder: "翻訳を入力" %>
-    <%= f.submit "回答する", class:"btn" %>
-  </div>
-  <%=link_to "戻る", root_path, class:"back-btn" %>
-<% end %>
+<%= render "shared/header" %>
+
+<div class="container">
+  <h1>回答記入欄</h1>
+  <%= form_with model: @answer, url: question_answers_path, local: true do |f| %>
+      <%= render "shared/error_messages", model: f.object %>
+    <div class="md-3">
+      <%= f.text_area :text, class:'form-control', placeholder: "翻訳を入力" %>
+    </div>
+    <%= f.submit "回答する", class:"btn btn-primary" %>
+    <%=link_to "戻る", root_path, class:"btn btn-primary" %>
+  <% end %>
+</div>
+
+<%= render "shared/footer" %>

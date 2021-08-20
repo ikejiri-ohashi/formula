@@ -1,26 +1,32 @@
-<h1>質問詳細</h1>
-<div class="question">
-  <div class="question-category">
-    <%= @question.category.name %>
+<%= render "shared/header" %>
+
+<div class="container">
+  <h2>質問詳細</h2>
+  <article class="blog-post">
+    <h3 class="blog-post-title">
+      <%= @question.category.name %>
+    </h3>
+    <p class="blog-post-meta"><%= @question.user.nickname %></p>
+    <h4><%= @question.text %></h4>
+    <blockquote>
+      <h5><%= @question.url %></h5>
+    </blockquote>
+    <blockquote>
+      <h4><%= @question.time %></h4>
+    </blockquote>
+    <hr>
+  </article>
+
+  <h2>回答一覧</h2>
+  <div class="blog-post">
+    <% @answer.each do |answer| %>
+      <div class="answer-text">
+        <%= answer.text %>
+      </div>
+    <% end %>
   </div>
-  <div class="question-text">
-    <%= @question.text %>
-  </div>
-  <div class="question-url">
-    <%= @question.url %>
-  </div>
-  <div class="question-time">
-    <%= @question.time %>
-  </div>
+
+  <%= link_to "トップページに戻る", root_path, class:"btn btn-primary" %>
 </div>
 
-<h1>回答一覧</h1>
-<div class="answer">
-  <% @answer.each do |answer| %>
-    <div class="answer-text">
-      <%= answer.text %>
-    </div>
-  <% end %>
-</div>
-
-<%= link_to "トップページに戻る", root_path, class:"back-btn" %>
+<%= render "shared/footer" %>
