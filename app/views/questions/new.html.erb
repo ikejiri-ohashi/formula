@@ -8,21 +8,25 @@
       </div>
       <%= form_with model: @question, url: questions_path, local: true do |f| %>
         <%= render 'shared/error_messages', model: f.object %>
-        <div class="m-4">
+        <div class="col m-4">
           <%= f.label :url, class:"form-label" %><br />
-          <%= f.text_area :url, class:"form-control", placeholder:"動画のリンクを入力してください(必須)" %>
+          <%= f.text_area :url, class:"form-control form-control-sm" %>
+          <div class="form-text">動画のリンクを貼り付けてください（必須）</div>
         </div>
-        <div class="m-4">
+        <div class="col m-4">
           <%= f.label :time, class:"form-label" %><br />
-          <%= f.text_area :time, class:"form-control", placeholder:"動画内の時間を指定してください(必須)" %>
+          <%= f.text_area :time, class:"form-control form-control-sm" %>
+          <div class="form-text">翻訳する場所を動画内の時間で指定してください（必須）</div>
         </div>
         <div class="m-4">
           <%= f.label :text, class:"form-label" %><br />
-          <%= f.text_area :text, class:'form-control', placeholder:"補足事項があれば記入してください(任意)" %>
+          <%= f.text_area :text, class:'form-control form-control-lg' %>
+          <div class="form-text">補足事項がありましたら記入してください（任意）</div>
         </div>
         <div class="m-4">
           <%= f.label :category, class:"form-label" %><br />
           <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"form-select"}) %>
+          <div class="form-text">動画の内容のカテゴリーを選択してください（必須）</div>
         </div>
         <div class="mt-4 d-flex justify-content-center">
           <%= f.submit "質問を投稿する", class:"btn btn-primary" %>
