@@ -1,32 +1,49 @@
 <%= render "shared/header" %>
 
-<div class="container">
-  <h2>質問詳細</h2>
-  <article class="blog-post">
-    <h3 class="blog-post-title">
-      <%= @question.category.name %>
-    </h3>
-    <p class="blog-post-meta"><%= @question.user.nickname %></p>
-    <h4><%= @question.text %></h4>
-    <blockquote>
-      <h5><%= @question.url %></h5>
-    </blockquote>
-    <blockquote>
-      <h4><%= @question.time %></h4>
-    </blockquote>
-    <hr>
-  </article>
-
-  <h2>回答一覧</h2>
-  <div class="blog-post">
-    <% @answer.each do |answer| %>
-      <div class="answer-text">
-        <%= answer.text %>
+<main class="container">
+  <div class="row gy-8">
+    <div class="col-sm-8">
+      <div class="p-3 my-3 rounded h-auto bg-white">
+        <strong><%= @question.category.name %></strong>
+        <div class="my-3">
+          <%= @question.text %>
+        </div>
+        <%= @question.url %>
+        <br>動画内の場所：<%= @question.time %>
+        <hr>
+        <% if @answer.blank? %>
+          <strong>ご質問ありがとうございます！<br>回答が作成されるまでしばらくお待ちください。</strong>
+        <% else %>
+          <strong>ベストアンサー</strong><br>
+          <div class="mt-3">
+            <% @answer.each do |answer| %>
+              <%= answer.text %>
+            <% end %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
-  </div>
+      <%= link_to "トップページに戻る", root_path, class:"btn btn-primary" %>
+    </div>
+    <div class="col-sm-4">
+      <div class="p-3 my-3 rounded bg-white">
+        <h4 class="font-italic">このサービスについて</h4>
+        <p class="mb-0">ここで作成された和訳は管理者の推測に基づいたものであり、実際のドライバーの意向を表したものではありません。</p>
+      </div>
+      <div class="p-3 my-3 rounded bg-white">
+        <h4 class="font-italic">注意点</h4>
+        <p class="mb-0">ここで作成された和訳は管理者の推測に基づいたものであり、実際のドライバーの意向を表したものではありません。</p>
+      </div>
 
-  <%= link_to "トップページに戻る", root_path, class:"btn btn-primary" %>
-</div>
+      <div class="p-3">
+        <h4 class="font-italic">SNS</h4>
+        <ol class="list-unstyled">
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">Qiita</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</main>
 
 <%= render "shared/footer" %>
