@@ -3,10 +3,8 @@
 <main class="container">
   <div class="row py-3">
     <div class="col-sm-8">
-      <div class="p-4 p-md-5 mb-4 bg-info">
-        <p class="display-6 fw-italic">ずっと疑問だったF1英語は<br>ありませんか？</p>
-        <p class="lead my-3">エフー知恵袋はF1ドライバーが喋った英語をレースの状況に応じた適切な日本語訳に翻訳するサービスです。</p>
-        <p class="lead mb-0"><%= link_to "質問してみる", new_question_path, class:"text-white fw-bold" %></p>
+      <div class="mb-4">
+        <%= link_to image_tag("topmain2.png", class:"img-fluid"), "/" %>
       </div>
       <div class="col-auto">
         <h2 class="pb-4 mb-4 font-italic border-bottom">
@@ -26,7 +24,7 @@
     <div class="col-sm-4">
       <div class="p-4 mb-4 bg-white rounded">
         <h4 class="font-italic">このサービスについて</h4>
-        <p class="mb-0">ここで作成された和訳は管理者の推測に基づいたものであり、実際のドライバーの意向を表したものではありません。</p>
+        <p class="mb-0">エフー知恵袋は質問いただいた英語をレースの状況をもとに推測し、適切な日本語訳の案を提供するサービスです。<br>Google翻訳でも聞き取れないようなエンジンノイズが入った英語、ドライバーの荒い呼吸で分かりづらい英語などF1で疑問に思った英語を質問して一緒に解決してみましょう。</p>
       </div>
       <div class="p-4 mb-4 bg-white rounded">
         <h4 class="font-italic">注意点</h4>
