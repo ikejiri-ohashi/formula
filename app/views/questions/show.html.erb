@@ -55,19 +55,21 @@
         <strong>コメント</strong><br>
         <%= form_with model: @comment, url: question_comments_path(@question), id: "form", local: true do |f| %>
           <div class='pt-4'>
-            <%= f.text_area :text, class:'form-control', placeholder: "コメントを入力" %>
+            <%= f.text_area :text, class:'form-control', id: "content", placeholder: "コメントを入力" %>
           </div>
           <div class='pt-3'>
             <%= f.submit "回答する",  id: "submit", class:"btn btn-primary" %>
           </div>
         <% end %>
         <hr>
-        <% @comment.each do |comment|%>
-          <div class='pt-4'>
-            <%= comment.text %>
-            <hr>
-          </div>
-        <% end %>
+        <div id="list">
+        </div>
+        <%# <% @comment.each do |comment|%> %>
+          <%# <div class='pt-4'> %>
+            <%# <%= comment.text %> %>
+            <%# <hr> %>
+          <%# </div> %>
+        <%# <% end %> %>
       </div>
     </div>
     <div class="col-sm-4">
