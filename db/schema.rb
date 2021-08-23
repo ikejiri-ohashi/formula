@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_23_045826) do
+ActiveRecord::Schema.define(version: 2021_08_23_083856) do
 
   create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(version: 2021_08_23_045826) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["question_id"], name: "index_answers_on_question_id"
     t.index ["user_id"], name: "index_answers_on_user_id"
+  end
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "question_id", null: false
+    t.text "text", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_id"], name: "index_comments_on_question_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -66,6 +76,8 @@ ActiveRecord::Schema.define(version: 2021_08_23_045826) do
 
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
+  add_foreign_key "comments", "questions"
+  add_foreign_key "comments", "users"
   add_foreign_key "favorites", "answers"
   add_foreign_key "favorites", "users"
   add_foreign_key "likes", "questions"
