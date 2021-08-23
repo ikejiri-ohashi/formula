@@ -9,4 +9,8 @@ class User < ApplicationRecord
   has_many :liked_questions, through: :likes, source: :question
 
   validates :nickname, presence: true
+
+  def already_liked?(question)
+    self.likes.exists?(question_id: question.id)
+  end
 end

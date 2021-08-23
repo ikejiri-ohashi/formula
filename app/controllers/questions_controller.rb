@@ -21,6 +21,7 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @answer = @question.answers.includes(:user)
+    @like = Like.new
   end
 
   private
