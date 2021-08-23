@@ -16,7 +16,8 @@
           <% end %>
               <br><%= question.text %><br>
               <%= question.url %>
-              <%= question.time %>
+              <%= question.time %><br>
+              <%= question.liked_users.count %>
               <hr>
         <% end %>
       </div>
