@@ -1,3 +1,13 @@
+const buildHTML = (XHR) => {
+  const item = XHR.response.comment;
+  const html = `
+    <div class="comment">
+      <div class="comment-content">
+        ${item.text}
+      </div>
+    </div>`;
+  return html;
+};
 function question (){
   const submit = document.getElementById("submit");
   submit.addEventListener("click", (e) => {
@@ -11,14 +21,7 @@ function question (){
     XHR.onload = () => {
       const list = document.getElementById("list");
       const formText = document.getElementById("content");
-      const item = XHR.response.comment;
-      const html = `
-        <div class="comment">
-          <div class="comment-content">
-            ${item.text}
-          </div>
-        </div>`;
-      list.insertAdjacentHTML("afterend", html);
+      list.insertAdjacentHTML("afterend", buildHTML(XHR));
       formText.value = "";
     };
   });
