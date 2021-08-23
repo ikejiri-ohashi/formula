@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :answers, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :liked_questions, through: :likes, source: :question
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_answers, through: :favorites, source: :answer
 
   validates :nickname, presence: true
 
