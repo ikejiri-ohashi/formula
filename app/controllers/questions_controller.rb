@@ -22,6 +22,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @answer = @question.answers.includes(:user)
     @like = Like.new
+    @favorite = Favorite.new
   end
 
   private
