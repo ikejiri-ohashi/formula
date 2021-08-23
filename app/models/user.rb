@@ -15,4 +15,8 @@ class User < ApplicationRecord
   def already_liked?(question)
     self.likes.exists?(question_id: question.id)
   end
+
+  def already_favorited?(answer)
+    self.favorites.exists?(answer_id: answer.id)
+  end
 end
