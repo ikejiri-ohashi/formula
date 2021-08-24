@@ -2,8 +2,12 @@ const buildHTML = (XHR) => {
   const item = XHR.response.comment;
   const html = `
     <div class="comment">
-      <div class="comment-content">
+      <div class="pt-4">
+      <div class="pb-2">
+        <dt>${hidden_name.value}さん</dt><br>
+      </div>
         ${item.text}
+        <hr>
       </div>
     </div>`;
   return html;
@@ -16,6 +20,7 @@ function question (){
     const formData = new FormData(form);
     const XHR = new XMLHttpRequest();
     var question_id = document.getElementById("hidden_id").value;
+    
     XHR.open("POST", "/questions/" + question_id + "/comments " , true);
     XHR.responseType = "json";
     XHR.send(formData);
