@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     resources :answers, only: [:new, :create] do
       resources :favorites, only: [:create, :destroy]
     end
+    resources :comments, only: [:create]
   end
 end

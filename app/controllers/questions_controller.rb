@@ -2,7 +2,6 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   def index
     @questions = Question.order('created_at DESC')
-    @answer = Answer.new
   end
 
   def new
@@ -23,6 +22,7 @@ class QuestionsController < ApplicationController
     @answer = @question.answers.includes(:user)
     @like = Like.new
     @favorite = Favorite.new
+    @comment = @question.comments.includes(:user)
   end
 
   private

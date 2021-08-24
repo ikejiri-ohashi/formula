@@ -46,12 +46,41 @@
               <hr>
             <% end %>
           </div>
-          
-
         <% end %>
       </div>
       <div class="mt-4 d-flex justify-content-center">
-        <%= link_to "トップページに戻る", root_path, class:"mb-4 btn btn-outline-primary" %>
+        <%= link_to "トップページに戻る", root_path, class:"btn btn-outline-primary" %>
+      </div>
+      <div class="p-3 my-4 rounded h-auto bg-white">
+        <strong>コメント</strong><br>
+        <% if user_signed_in? %>
+          <%= form_with model: @comment, url: "/questions/:question_id/comments", id: "form", local: true do |f| %>
+            <div class='pt-4'>
+              <%= f.text_area :text, class:'form-control', id: "content", placeholder: "コメントを入力" %>
+            </div>
+            <div class='pt-3'>
+              <%= f.submit "投稿する",  id: "submit", class:"btn btn-primary" %>
+            </div>
+            <input type="hidden" value=<%= @question.id %> id="hidden_id" />
+            <input type="hidden" value=<%= current_user.nickname %> id="hidden_name" />
+          <% end %>
+        <% else %>
+          <div class='py-4'>
+            <dt>ログインするとコメントの投稿ができます</dt>
+          </div>
+        <% end %>
+        <hr>
+        <div id="list">
+        </div>
+        <% @comment.reverse.each do |comment|%>
+          <div class='pt-4'>
+            <div class="pb-2">
+              <dt><%= comment.user.nickname %>さん</dt><br>
+            </div>
+            <%= comment.text %>
+            <hr>
+          </div>
+        <% end %>
       </div>
     </div>
     <div class="col-sm-4">
