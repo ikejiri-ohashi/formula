@@ -15,7 +15,8 @@ function question (){
     const form = document.getElementById("form");
     const formData = new FormData(form);
     const XHR = new XMLHttpRequest();
-    XHR.open("POST", "/questions/:question_id/comments " , true);
+    var question_id = document.getElementById("hidden_id").value;
+    XHR.open("POST", "/questions/" + question_id + "/comments " , true);
     XHR.responseType = "json";
     XHR.send(formData);
     XHR.onload = () => {

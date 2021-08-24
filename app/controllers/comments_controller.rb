@@ -1,14 +1,9 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
   def create
-    comment = Comment.create(comment_params)
-    render json:{ comment: comment }
-    # @comment = Comment.create(comment_params)
-    # if @comment.save
-    #   redirect_to root_path
-    # else
-    #   redirect_to root_path
-    # end
+    @comment = Comment.create(comment_params)
+    @comment.save
+    render json:{ comment: @comment }
   end
 
   private

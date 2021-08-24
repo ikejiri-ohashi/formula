@@ -53,13 +53,15 @@
       </div>
       <div class="p-3 my-3 rounded h-auto bg-white">
         <strong>コメント</strong><br>
-        <%= form_with model: @comment, url: question_comments_path(@question), id: "form", local: true do |f| %>
+        <%= form_with model: @comment, url: "/questions/:question_id/comments", id: "form", local: true do |f| %>
           <div class='pt-4'>
             <%= f.text_area :text, class:'form-control', id: "content", placeholder: "コメントを入力" %>
           </div>
           <div class='pt-3'>
-            <%= f.submit "回答する",  id: "submit", class:"btn btn-primary" %>
+            <%= f.submit "投稿する",  id: "submit", class:"btn btn-primary" %>
           </div>
+          <input type="hidden" value=<%= @question.id %> id="hidden_id" />
+          
         <% end %>
         <hr>
         <div id="list">
