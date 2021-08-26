@@ -23,10 +23,9 @@ class Category < ActiveHash::Base
     { id: 21, name: 'アブダビGP(2021年)' },
     { id: 22, name: 'Youtube企画系動画' },
     { id: 23, name: 'Instagram, Twitter動画' },
-    { id: 24, name: 'その他GP動画' },
+    { id: 24, name: 'その他GP動画' }
   ]
 
   include ActiveHash::Associations
   has_many :questions
-
-  end
+end

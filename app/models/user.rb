@@ -14,10 +14,10 @@ class User < ApplicationRecord
   validates :nickname, presence: true
 
   def already_liked?(question)
-    self.likes.exists?(question_id: question.id)
+    likes.exists?(question_id: question.id)
   end
 
   def already_favorited?(answer)
-    self.favorites.exists?(answer_id: answer.id)
+    favorites.exists?(answer_id: answer.id)
   end
 end

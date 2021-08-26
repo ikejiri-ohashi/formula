@@ -6,7 +6,7 @@
       </div>
       <div class="col-6 align-self-center">
         <% if user_signed_in? %>
-          <%= "こんにちは、#{current_user.nickname}さん" %><br>
+          こんにちは、<%= link_to "#{current_user.nickname}さん", edit_user_registration_path, class:"text-decoration-none" %><br>
           <%= "ログアウトは" %><%= link_to "こちら", destroy_user_session_path, method: :delete, class:"text-decoration-none" %>
         <% else %>
           <%= "10秒でとても簡単に" %><%= link_to "新規登録", new_user_registration_path, class:"text-decoration-none"%>
