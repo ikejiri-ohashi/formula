@@ -30,6 +30,7 @@
         <% else %>
           <%= button_to '共感した！', new_user_session_path, class:"btn btn-outline-primary btn-sm" %>
         <% end %>
+        <input type="hidden" value=<%= @question.id %> id="hidden_like" />
         <hr>
         <% if @answer.blank? %>
           <strong>ご質問ありがとうございます！<br>回答が作成されるまでしばらくお待ちください。</strong>
@@ -76,7 +77,6 @@
             <div class='pt-3'>
               <%= f.submit "投稿する",  id: "submit", class:"btn btn-primary" %>
             </div>
-            <input type="hidden" value=<%= @question.id %> id="hidden_id" />
             <input type="hidden" value=<%= current_user.nickname %> id="hidden_name" />
           <% end %>
         <% else %>

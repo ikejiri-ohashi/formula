@@ -5,7 +5,7 @@ function question (){
     const like = document.getElementById("form");
     const likeData = new FormData(like);
     const XHR = new XMLHttpRequest();
-    var question_id = document.getElementById("hidden_id").value;
+    var question_id = document.getElementById("hidden_like").value;
     XHR.open("POST", "/questions/" + question_id + "/likes " , true);
     XHR.responseType = "json";
     XHR.send(likeData);
@@ -15,7 +15,7 @@ function question (){
         return null;
       };
       const list = document.getElementById("add_like");
-      const html = `あなたと`;
+      const html = `あなたと他`;
       list.insertAdjacentHTML("afterend", html);
     };
   });

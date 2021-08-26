@@ -5,7 +5,7 @@ function question (){
     const favorite = document.getElementById("form");
     const favoriteData = new FormData(favorite);
     const XHR = new XMLHttpRequest();
-    var question_id = document.getElementById("hidden_id").value;
+    var question_id = document.getElementById("hidden_like").value;
     var answer_id = document.getElementById("hidden_favorite").value;
     XHR.open("POST", "/questions/" + question_id + "/answers/" + answer_id + "/favorites " , true);
     XHR.responseType = "json";
@@ -16,7 +16,7 @@ function question (){
         return null;
       };
       const list = document.getElementById("add_favorite");
-      const html = `あなたと`;
+      const html = `あなたと他`;
       list.insertAdjacentHTML("afterend", html);
     };
   });
