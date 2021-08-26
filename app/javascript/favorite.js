@@ -1,20 +1,21 @@
 function question (){
-  const like = document.getElementById("like");
-  like.addEventListener("click", (e) => {
+  const favorite = document.getElementById("favorite");
+  favorite.addEventListener("click", (e) => {
     e.preventDefault();
-    const like = document.getElementById("form");
-    const likeData = new FormData(like);
+    const favorite = document.getElementById("form");
+    const favoriteData = new FormData(favorite);
     const XHR = new XMLHttpRequest();
     var question_id = document.getElementById("hidden_like").value;
-    XHR.open("POST", "/questions/" + question_id + "/likes " , true);
+    var answer_id = document.getElementById("hidden_favorite").value;
+    XHR.open("POST", "/questions/" + question_id + "/answers/" + answer_id + "/favorites " , true);
     XHR.responseType = "json";
-    XHR.send(likeData);
+    XHR.send(favoriteData);
     XHR.onload = () => {
       if (XHR.status != 200) {
         alert(`Error ${XHR.status}: ${XHR.statusText}`);
         return null;
       };
-      const list = document.getElementById("add_like");
+      const list = document.getElementById("add_favorite");
       const html = `あなたと他`;
       list.insertAdjacentHTML("afterend", html);
     };

@@ -30,6 +30,7 @@
         <% else %>
           <%= button_to '共感した！', new_user_session_path, class:"btn btn-outline-primary btn-sm" %>
         <% end %>
+        <input type="hidden" value=<%= @question.id %> id="hidden_like" />
         <hr>
         <% if @answer.blank? %>
           <strong>ご質問ありがとうございます！<br>回答が作成されるまでしばらくお待ちください。</strong>
@@ -39,17 +40,25 @@
             <% @answer.each do |answer| %>
               <%= answer.text %>
               <div class="pt-4 pb-2 d-flex">
-                <dt><%= answer.favorites.count %>人</dt>が役に立ったと言っています
+                <div id="add_favorite"></div><dt><%= answer.favorites.count %>人</dt>が役に立ったと言っています
               </div>
               <% if user_signed_in? %>
                 <% if current_user.already_favorited?(answer) %>
                   <%= button_to '役に立ったを取り消す', question_answer_favorite_path(answer, answer.id), class:"btn btn-primary btn-sm", method: :delete %>
                 <% else %>
-                  <%= button_to '役に立った！', question_answer_favorites_path(answer, answer.id), class:"btn btn-outline-primary btn-sm" %>
+                  <script type="text/javascript">
+                  $(function() {
+                    $("#favorite").click(function() {
+                      $("#favorite").prop("disabled", true);
+                    });
+                  });
+                  </script>
+                  <%= button_to '役に立った！', question_answer_favorites_path(answer, answer.id), id:"favorite", class:"btn btn-outline-primary btn-sm" %>
                 <% end %>
               <% else %>
                 <%= button_to '役に立った！', new_user_session_path, class:"btn btn-outline-primary btn-sm" %>
               <% end %>
+              <input type="hidden" value=<%= answer.id %> id="hidden_favorite" />
               <hr>
             <% end %>
           </div>
@@ -68,7 +77,6 @@
             <div class='pt-3'>
               <%= f.submit "投稿する",  id: "submit", class:"btn btn-primary" %>
             </div>
-            <input type="hidden" value=<%= @question.id %> id="hidden_id" />
             <input type="hidden" value=<%= current_user.nickname %> id="hidden_name" />
           <% end %>
         <% else %>
