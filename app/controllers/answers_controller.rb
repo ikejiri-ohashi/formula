@@ -4,7 +4,7 @@ class AnswersController < ApplicationController
   def new
     @answer = Answer.new
   end
-  
+
   def create
     @answer = Answer.create(answer_params)
     if @answer.save
@@ -15,6 +15,7 @@ class AnswersController < ApplicationController
   end
 
   private
+
   def answer_params
     params.require(:answer).permit(:text).merge(user_id: current_user.id, question_id: params[:question_id])
   end

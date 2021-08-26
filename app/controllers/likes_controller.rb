@@ -1,7 +1,7 @@
 class LikesController < ApplicationController
   def create
     @like = current_user.likes.create(question_id: params[:question_id])
-    render json:{ like: @like }
+    render json: { like: @like }
   end
 
   def destroy
