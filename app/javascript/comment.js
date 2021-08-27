@@ -3,10 +3,12 @@ const buildHTML = (XHR) => {
   const html = `
     <div class="comment">
       <div class="pt-4">
-      <div class="pb-2">
-        <dt>${hidden_name.value}さん</dt><br>
-      </div>
-        ${item.text}
+        <div class="pb-2">
+          <dt>${hidden_name.value}さん</dt><br>
+        </div>
+        <div class="textarea">
+          ${item.text}
+        </div>
         <hr>
       </div>
     </div>`;
@@ -19,7 +21,7 @@ function question (){
     const form = document.getElementById("form");
     const formData = new FormData(form);
     const XHR = new XMLHttpRequest();
-    var question_id = document.getElementById("hidden_id").value;
+    var question_id = document.getElementById("hidden_like").value;
     
     XHR.open("POST", "/questions/" + question_id + "/comments " , true);
     XHR.responseType = "json";

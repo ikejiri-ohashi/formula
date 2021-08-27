@@ -38,7 +38,9 @@
           <strong>ベストアンサー</strong><br>
           <div class="pt-4">
             <% @answer.each do |answer| %>
-              <%= answer.text %>
+              <div class="textarea">
+                <%= answer.text %>
+              </div>
               <div class="pt-4 pb-2 d-flex">
                 <div id="add_favorite"></div><dt><%= answer.favorites.count %>人</dt>が役に立ったと言っています
               </div>
@@ -89,10 +91,10 @@
         </div>
         <% @comment.reverse.each do |comment|%>
           <div class='pt-4'>
-            <div class="pb-2">
               <dt><%= comment.user.nickname %>さん</dt><br>
+            <div class="textarea">
+              <%= comment.text %>
             </div>
-            <%= comment.text %>
             <hr>
           </div>
         <% end %>
