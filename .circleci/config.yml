@@ -1,15 +1,35 @@
-version: 2.1
-orbs:
-  ruby: circleci/ruby@0.1.2 
-
+version: 2
 jobs:
-  build:
+  test:
     docker:
-      - image: circleci/ruby:2.6.3-stretch-node
-    executor: ruby/default
+      - image: circleci/ruby:2.6.5-node-browsers
+        environment:
+          - BUNDLER_VERSION: 2.1.4
+          - RAILS_ENV: 'test'
+      - image: circleci/mysql:8.0
+        environment:
+          - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          - MYSQL_ROOT_PASSWORD: ''
+          - MYSQL_DATABASE: formula_test
+
+    working_directory: ~/formula
     steps:
       - checkout
       - run:
-          name: Which bundler?
-          command: bundle -v
-      - ruby/bundle-install
+          name: bundle install
+          command: bundle install --path vendor/bundle
+      - run:
+          name: データベースの起動を待機
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
+      - run:
+          name: データベースのセットアップ
+          command: bundle exec rake db:schema:load
+      - run:
+          name: テストの実行
+          command: bundle exec rspec
+
+workflows:
+  version: 2
+  workflows:
+    jobs:
+      - test
