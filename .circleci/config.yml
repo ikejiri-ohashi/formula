@@ -11,6 +11,7 @@ jobs:
           - RAILS_ENV: 'test'
     # executor: ruby/default
       - image: circleci/mysql:8.0
+        command: --default-authentication-plugin=mysql_native_password
     
     working_directory: ~/formula
 
@@ -35,11 +36,11 @@ jobs:
 
       # - run: mv config/database.yml.ci config/database.yml
 
-      - run:
-          name: Database Setup
-          command: |
-            bundle exec rake db:create
-            bundle exec rake db:structure:load
+      # - run:
+      #     name: Database Setup
+      #     command: |
+      #       bundle exec rake db:create
+      #       bundle exec rake db:structure:load
 
 
       - run: echo "hello world"
