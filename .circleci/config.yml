@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  test:
+  build:
     docker:
       - image: circleci/ruby:2.6.5-node-browsers
         environment:
@@ -9,16 +9,19 @@ jobs:
       - image: circleci/mysql:8.0
         environment:
           - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
-          - MYSQL_ROOT_PASSWORD: ''
-          - MYSQL_DATABASE: formula_test
+          - MYSQL_ROOT_HOST: '%'
 
     working_directory: ~/formula
+
     steps:
       - checkout
+
       - run:
           name: bundle installする
-          command: gem install bundler -v 2.1.4
-          command: bundle install --jobs=4 --retry=3 --path vendor/bundle
+          command: |
+            gem install bundler -v 2.1.4
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+            
       - run:
           name: データベースの起動を待機
           command: dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
