@@ -36,11 +36,11 @@ jobs:
 
       # - run: mv config/database.yml.ci config/database.yml
 
-      # - run:
-      #     name: Database Setup
-      #     command: |
-      #       bundle exec rake db:create
-      #       bundle exec rake db:structure:load
+      - run:
+          name: Database Setup
+          command: |
+            bundle exec rake db:create
+            bundle exec rake db:structure:load
 
 
       - run: echo "hello world"
