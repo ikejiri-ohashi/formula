@@ -17,6 +17,7 @@ jobs:
       - checkout
       - run:
           name: bundle install
+          command: gem install bundler:2.1.4
           command: bundle install --path vendor/bundle
       - run:
           name: データベースの起動を待機
