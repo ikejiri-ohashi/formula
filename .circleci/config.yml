@@ -14,8 +14,7 @@ jobs:
       - image: circleci/mysql:8.0
         command: --default-authentication-plugin=mysql_native_password
         environment:
-          - MYSQL_HOST: 127.0.0.1
-          - MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          - MYSQL_DATABASE: 'docker_test'
 
     
     working_directory: ~/formula
