@@ -41,6 +41,7 @@ group :development, :test do
   gem 'capistrano3-unicorn'
   gem 'rspec-rails'
   gem 'rubocop'
+  gem 'rubocop-rails'
 end
 
 group :development do
