@@ -9,8 +9,7 @@ AllCops:
    - "node_modules/**/*"
    - "Gemfile"
 
-Rails:
-  Enabled: true
+NewCops: enable
 
 # 1行あたりの文字数をチェックする
 Layout/LineLength:
