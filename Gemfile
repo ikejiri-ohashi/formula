@@ -69,3 +69,4 @@ gem 'line-bot-api'
 group :production do
   gem 'unicorn', '5.4.1'
 end
+gem 'rspec_junit_formatter'
