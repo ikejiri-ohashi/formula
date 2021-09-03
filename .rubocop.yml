@@ -23,9 +23,6 @@ Gemspec:
 Lint:
   Enabled: true
 
-Performance:
-  Enabled: true
-
 Rubycw:
   Enabled: true
 
