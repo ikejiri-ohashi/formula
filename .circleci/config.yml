@@ -9,13 +9,14 @@ jobs:
         environment:
           - BUNDLER_VERSION: 2.1.4
           - RAILS_ENV: 'test'
-          - DB_USERNAME: 'root'
+          - DB_USERNAME: 'test_user'
           - DB_PASSWORD: 'password'
           - DB_HOST: 127.0.0.1
     # executor: ruby/default
       - image: circleci/mysql:8.0
+        command: --default-authentication-plugin=mysql_native_password
         environment:
-          - MYSQL_USERNAME: 'root'
+          - MYSQL_USER: 'test_user'
           - MYSQL_PASSWORD: 'password'
           - MYSQL_DATABASE: 'docker_test'
 

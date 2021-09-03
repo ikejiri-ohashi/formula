@@ -12,7 +12,7 @@ development:
 
 test:
   <<: *default
-  username: 'root'
+  username: 'test_user'
   password: 'password'
   host: '127.0.0.1'
   database: docker_test
