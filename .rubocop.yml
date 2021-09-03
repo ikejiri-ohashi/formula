@@ -23,8 +23,5 @@ Gemspec:
 Lint:
   Enabled: true
 
-Rubycw:
-  Enabled: true
-
 Security:
   Enabled: true
