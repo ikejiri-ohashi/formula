@@ -14,14 +14,26 @@ AllCops:
   NewCops: enable
   TargetRubyVersion: 2.6.5
 
-Bundler:
+Rails:
   Enabled: true
 
-Gemspec:
-  Enabled: true
+Style/AndOr:
+  EnforcedStyle: conditionals
 
-Lint:
-  Enabled: true
+Style/AsciiComments:
+  Enabled: false
 
-Security:
-  Enabled: true
+Style/Documentation:
+  Enabled: false
+
+Style/NumericLiterals:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Lint/ShadowedException:
+  Enabled: false
