@@ -6,6 +6,5 @@ class CreateFavorites < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-    add_index :favorites, :user, unique: true
   end
 end
