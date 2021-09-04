@@ -61,7 +61,7 @@ CyclomaticComplexity:
   Enabled: false
 
 # 例外を抑制している
-HandleExceptions:
+SuppressedException:
   Enabled: false
 
 # 行が長すぎる
