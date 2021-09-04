@@ -1,5 +1,5 @@
 class Favorite < ApplicationRecord
   belongs_to :answer
   belongs_to :user
-  validates :answer_id, uniqueness: { scope: :user_id }
+  validates :answer_id, uniqueness: user_id
 end
