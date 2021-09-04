@@ -27,5 +27,5 @@ class Category < ActiveHash::Base
   ]
 
   include ActiveHash::Associations
-  has_many :questions
+  belongs_to :questions
 end
