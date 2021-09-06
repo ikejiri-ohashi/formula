@@ -11,7 +11,7 @@ set :rbenv_ruby, '2.6.5'
 
 # どの公開鍵を利用してデプロイするか
 set :ssh_options, auth_methods: ['publickey'],
-                                  keys: ['~/.ssh/ikejirinabekey.pem'] 
+                                  keys: ['~/.ssh/IdentityFile ~/.ssh/formula_rsa_1c1316dacb109e962f6de38fdc0c889d'] 
 
 set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
 
