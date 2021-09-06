@@ -62,7 +62,7 @@
 server '35.72.79.96', user: 'ec2-user', roles: %w{app db web}
 
 set :ssh_options, {
-  keys: %w(IdentityFile ~/.ssh/formula_rsa_1c1316dacb109e962f6de38fdc0c889d),
+  keys: %w(IdentityFile ~/.ssh/ikejirinabekey.pem),
   forward_agent: true,
   auth_methods: %w[publickey]
 }
