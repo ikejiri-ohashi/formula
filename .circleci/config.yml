@@ -89,9 +89,9 @@ jobs:
       - image: circleci/mysql:8.0
         command: --default-authentication-plugin=mysql_native_password
         environment:
-          - MYSQL_USER: 'test_user'
-          - MYSQL_PASSWORD: 'password'
-          - MYSQL_DATABASE: 'docker_test'
+          - MYSQL_USER: 'root'
+          - MYSQL_PASSWORD: <%= ENV['DATABASE_PASSWORD'] %>
+          - MYSQL_DATABASE: 'formula_production'
     steps:
       - checkout
       - ruby/install-deps
