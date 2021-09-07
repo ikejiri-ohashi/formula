@@ -1,9 +1,12 @@
 version: 2.1
 
+orbs:
+  ruby: circleci/ruby@1.1.0
+
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.6.5-stretch-node
+      - image: circleci/ruby:2.6.5-node-browsers
         environment:
           - BUNDLER_VERSION: 2.1.4
           - RAILS_ENV: 'test'
@@ -22,7 +25,7 @@ jobs:
 
     steps:
       - checkout
-
+      - ruby/install-deps
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
@@ -34,39 +37,70 @@ jobs:
             gem install bundler -v 2.1.4
             bundle install --jobs=4 --retry=3 --path vendor/bundle
 
+      - run:
+          name: remove mysql2 temporary
+          command: |
+            bundle exec gem uninstall mysql2
+      - run:
+          name: reinstall mysql2 temporary
+          command: |
+            bundle install --jobs=3 --retry=3 --path vendor/bundle
+
       - save_cache:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
-      - run:
-          name: waiting for stating database
-          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
+
+      - run:
+          name: yarn Install
+          command: yarn install
+          
+      - run: bundle exec bin/webpack
 
       - run:
           name: Rubocop
           command: bundle exec rubocop
 
       - run:
-          name: Run rspec in parallel
+          name: Run rspec
           command: |
             bundle exec rspec --profile 10 \
                               --format RspecJunitFormatter \
                               --out test_results/rspec.xml \
                               --format progress \
-                              $(circleci tests glob "spec/models/question_spec.rb" | circleci tests split --split-by=timings)
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
       - store_test_results:
           path: /tmp/test-results
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
-
+  deploy:
+    docker:
+      - image: circleci/ruby:2.6.5-node-browsers
+        environment:
+          BUNDLER_VERSION: 2.1.4
+    steps:
+      - checkout
+      - ruby/install-deps
       - add_ssh_keys:
           fingerprints:
             - "1c:13:16:da:cb:10:9e:96:2f:6d:e3:8f:dc:0c:88:9d"
       - deploy:
           name: Capistrano deploy
           command: bundle exec cap production deploy
+
+workflows:
+  version: 2.1
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
