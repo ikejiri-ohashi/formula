@@ -20,5 +20,6 @@ test:
 production:
   <<: *default
   database: formula_production
-  username: formula
-  password: <%= ENV['FORMULA_DATABASE_PASSWORD'] %>
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock
