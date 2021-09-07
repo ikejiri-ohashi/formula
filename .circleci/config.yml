@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.6.5-stretch-node
+      - image: circleci/ruby:2.6.5-node-browsers
         environment:
           - BUNDLER_VERSION: 2.1.4
           - RAILS_ENV: 'test'
@@ -22,7 +22,6 @@ jobs:
 
     steps:
       - checkout
-
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
@@ -56,17 +55,35 @@ jobs:
                               --format RspecJunitFormatter \
                               --out test_results/rspec.xml \
                               --format progress \
-                              $(circleci tests glob "spec/models/question_spec.rb" | circleci tests split --split-by=timings)
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
       - store_test_results:
           path: /tmp/test-results
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
-
+  deploy:
+    docker:
+      - image: circleci/ruby:2.6.5-node-browsers
+        environment:
+          BUNDLER_VERSION: 2.1.4
+    steps:
+      - checkout
       - add_ssh_keys:
           fingerprints:
             - "1c:13:16:da:cb:10:9e:96:2f:6d:e3:8f:dc:0c:88:9d"
       - deploy:
           name: Capistrano deploy
           command: bundle exec cap production deploy
+
+workflows:
+  version: 2.1
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
