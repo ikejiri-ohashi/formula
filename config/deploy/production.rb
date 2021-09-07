@@ -1,4 +1,4 @@
-server '35.72.79.96', user: 'ec2-user', roles: %w{app db web}
+server '172.31.44.152', user: 'ec2-user', roles: %w{app db web}
 
 set :ssh_options, {
   keys: [ENV.fetch('PRODUCTION_SSH_KEY').to_s],
