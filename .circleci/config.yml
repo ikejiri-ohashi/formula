@@ -82,17 +82,17 @@ jobs:
           path: /tmp/test-results
           destination: test-results
   deploy:
-    # docker:
-      # - image: circleci/ruby:2.6.5-node-browsers
-      #   environment:
-      #     BUNDLER_VERSION: 2.1.4
-      # - image: circleci/mysql:8.0
-      #   command: --default-authentication-plugin=mysql_native_password
-      #   environment:
-      #     - MYSQL_DATABASE: 'formula_production'
+    docker:
+      - image: circleci/ruby:2.6.5-node-browsers
+        environment:
+          BUNDLER_VERSION: 2.1.4
+      - image: circleci/mysql:8.0
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+          - MYSQL_DATABASE: 'docker_development'
     steps:
-      # - checkout
-      # - ruby/install-deps
+      - checkout
+      - ruby/install-deps
       - add_ssh_keys:
           fingerprints:
             - "1c:13:16:da:cb:10:9e:96:2f:6d:e3:8f:dc:0c:88:9d"
