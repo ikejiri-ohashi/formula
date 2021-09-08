@@ -9,87 +9,98 @@ jobs:
       - image: circleci/ruby:2.6.5-node-browsers
         environment:
           - BUNDLER_VERSION: 2.1.4
+    steps:
+      - checkout
+      - ruby/install-deps
+      
+  test:
+    docker:
+      - image: circleci/ruby:2.6.5-node-browsers
+        environment:
+          - BUNDLER_VERSION: 2.1.4
           - RAILS_ENV: 'test'
-          - DB_USERNAME: 'test_user'
-          - DB_PASSWORD: 'password'
+          # - DB_USERNAME: 'test_user'
+          # - DB_PASSWORD: 'password'
           - DB_HOST: 127.0.0.1
       - image: circleci/mysql:8.0
         command: --default-authentication-plugin=mysql_native_password
         environment:
+          # MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          # MYSQL_ROOT_HOST: '%'
           - MYSQL_USER: 'test_user'
           - MYSQL_PASSWORD: 'password'
           - MYSQL_DATABASE: 'docker_test'
-
-    
-    working_directory: ~/formula
-
     steps:
       - checkout
       - ruby/install-deps
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            - v1-dependencies-
-
       - run:
-          name: install dependencies
-          command: |
-            gem install bundler -v 2.1.4
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
-
-      - run:
-          name: remove mysql2 temporary
-          command: |
-            bundle exec gem uninstall mysql2
-      - run:
-          name: reinstall mysql2 temporary
-          command: |
-            bundle install --jobs=3 --retry=3 --path vendor/bundle
-
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-
-      - run:
-          name: waiting for stating database
-          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:3306 -timeout 1m
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
+      # Run rspec in parallel
+      - ruby/rspec-test
+      - ruby/rubocop-check
+      # - restore_cache:
+      #     keys:
+      #       - v1-dependencies-{{ checksum "Gemfile.lock" }}
+      #       - v1-dependencies-
 
-      - run:
-          name: yarn Install
-          command: yarn install
+      # - run:
+      #     name: install dependencies
+      #     command: |
+      #       gem install bundler -v 2.1.4
+      #       bundle install --jobs=4 --retry=3 --path vendor/bundle
+
+      # - run:
+      #     name: remove mysql2 temporary
+      #     command: |
+      #       bundle exec gem uninstall mysql2
+      # - run:
+      #     name: reinstall mysql2 temporary
+      #     command: |
+      #       bundle install --jobs=3 --retry=3 --path vendor/bundle
+
+      # - save_cache:
+      #     paths:
+      #       - ./vendor/bundle
+      #     key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+      # - run:
+      #     name: waiting for stating database
+      #     command: dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
+      # - run: bundle exec rake db:create
+      # - run: bundle exec rake db:schema:load
+
+      # - run:
+      #     name: yarn Install
+      #     command: yarn install
           
-      - run: bundle exec bin/webpack
+      # - run: bundle exec bin/webpack
 
-      - run:
-          name: Rubocop
-          command: bundle exec rubocop
+      # - run:
+      #     name: Rubocop
+      #     command: bundle exec rubocop
 
-      - run:
-          name: Run rspec
-          command: |
-            bundle exec rspec --profile 10 \
-                              --format RspecJunitFormatter \
-                              --out test_results/rspec.xml \
-                              --format progress \
-                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      # - run:
+      #     name: Run rspec
+      #     command: |
+      #       bundle exec rspec --profile 10 \
+      #                         --format RspecJunitFormatter \
+      #                         --out test_results/rspec.xml \
+      #                         --format progress \
+      #                         $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
-      - store_test_results:
-          path: /tmp/test-results
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
+      # - store_test_results:
+      #     path: /tmp/test-results
+      # - store_artifacts:
+      #     path: /tmp/test-results
+      #     destination: test-results
   deploy:
     docker:
       - image: circleci/ruby:2.6.5-node-browsers
         environment:
           BUNDLER_VERSION: 2.1.4
-      - image: circleci/mysql:8.0
-        command: --default-authentication-plugin=mysql_native_password
-        environment:
-          - MYSQL_DATABASE: 'docker_test'
     steps:
       - checkout
       - ruby/install-deps
@@ -101,13 +112,16 @@ jobs:
           command: bundle exec cap production deploy
 
 workflows:
-  version: 2.1
-  build-deploy:
+  version: 2
+  build_accept_deploy:
     jobs:
       - build
-      - deploy:
+      - test:
           requires:
             - build
+      - deploy:
+          requires:
+            - test
           filters:
             branches:
               only: master
