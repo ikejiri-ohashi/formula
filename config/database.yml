@@ -22,7 +22,15 @@ test:
 
 production:
   <<: *default
-  database: formula_production
-  username: root
+  # database: formula_production
+  # username: root
+  # password: <%= ENV['DATABASE_PASSWORD'] %>
+  # socket: /var/lib/mysql/mysql.sock
+
+  adapter: mysql2
+  encoding: utf8
+  database: <%= ENV['RDS_DB_NAME'] %>
+  username: admin
   password: <%= ENV['DATABASE_PASSWORD'] %>
-  socket: /var/lib/mysql/mysql.sock
+  host: <%= ENV['RDS_HOSTNAME'] %>
+  port: '3306'
