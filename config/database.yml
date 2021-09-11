@@ -28,10 +28,8 @@ production:
   # password: <%= ENV['DATABASE_PASSWORD'] %>
   # socket: /var/lib/mysql/mysql.sock
 
-  adapter: mysql2
-  encoding: utf8
   database: <%= ENV['RDS_DB_NAME'] %>
   username: admin
   password: <%= ENV['DATABASE_PASSWORD'] %>
-  host: <%= ENV['RDS_HOSTNAME'] %>
+  host: formula-db-for-ec2.cxlmapswaeeo.ap-northeast-1.rds.amazonaws.com
   port: '3306'
