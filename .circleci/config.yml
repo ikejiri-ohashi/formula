@@ -42,6 +42,8 @@ jobs:
       - image: circleci/ruby:2.6.5-node-browsers
         environment:
           BUNDLER_VERSION: 2.1.4
+      - image: circleci/mysql:8.0
+        command: --default-authentication-plugin=mysql_native_password
     steps:
       - checkout
       - ruby/install-deps
