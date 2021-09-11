@@ -30,7 +30,7 @@ production:
 
   adapter: mysql2
   encoding: utf8
-  database: 'formula-db-for-ec2'
+  database: <%= ENV['RDS_DB_NAME'] %>
   username: 'admin'
   password: <%= ENV['DATABASE_PASSWORD'] %>
   host: <%= ENV['RDS_HOSTNAME'] %>
