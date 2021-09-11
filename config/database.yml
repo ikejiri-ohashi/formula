@@ -22,6 +22,7 @@ test:
 
 production:
   <<: *default
+  # Mariadbの接続先
   # database: formula_production
   # username: root
   # password: <%= ENV['DATABASE_PASSWORD'] %>
