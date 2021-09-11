@@ -27,9 +27,9 @@ production:
   # username: root
   # password: <%= ENV['DATABASE_PASSWORD'] %>
   # socket: /var/lib/mysql/mysql.sock
-  
+
   database: <%= ENV['RDS_DB_NAME'] %>
-  username: admin
+  username: <%= ENV['RDS_USERNAME'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
-  # host: <%= ENV['RDS_HOSTNAME'] %>
+  host: <%= ENV['RDS_HOSTNAME'] %>
   port: '3306'
