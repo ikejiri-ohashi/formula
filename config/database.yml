@@ -32,5 +32,5 @@ production:
   username: <%= ENV['RDS_USERNAME'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
   host: <%= ENV['RDS_HOSTNAME'] %>
-  port: '3306'
+  port: '3307'
   
